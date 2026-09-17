@@ -16,11 +16,9 @@ def ReemplazarNulos(DatosExcel):
     DatosExcel["Sucursal"] =  DatosExcel["Sucursal"].fillna(value="Sin Identificar")
     return DatosExcel
 
-def QuitarEspacios(DatosExcel):
-    return DatosExcel["Sucursal"].str.strip()
-
-def MayusculasParaNombres(DatosExcel):
-    return DatosExcel["Sucursal"].str.tittle()
+def ModificarDatos(DatosExcel):
+    DatosExcel["Sucursal"] = DatosExcel["Sucursal"].str.title().str.strip()
+    return DatosExcel
 
 def ResumenDeVentas(Datos_Excel):
     TablaResumen = Datos_Excel.groupby("Sucursal")["Monto"].agg(
@@ -42,7 +40,6 @@ def Exportacion_Excel(Datos, Ventas):
 
 Datos_Excel = AccederArchivo()
 Datos_Excel = ReemplazarNulos(Datos_Excel)
-Datos_Excel = QuitarEspacios(Datos_Excel)
-Datos_Excel = MayusculasParaNombres(Datos_Excel)
+Datos_Excel = ModificarDatos(Datos_Excel)
 Ventas = ResumenDeVentas(Datos_Excel)
 Exportacion_Excel(Datos_Excel, Ventas)
