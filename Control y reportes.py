@@ -14,6 +14,7 @@ def AccederArchivo():
 def ReemplazarNulos(DatosExcel):
     DatosExcel = DatosExcel.dropna(subset=["Monto"])
     DatosExcel["Sucursal"] =  DatosExcel["Sucursal"].fillna(value="Sin Identificar")
+    DatosExcel["Cliente"] =  DatosExcel["Cliente"].fillna(value="Sin Identificar")
     return DatosExcel
 
 def ModificarDatos(DatosExcel):
